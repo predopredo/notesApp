@@ -3,8 +3,8 @@ const fs = require('fs')
 const chalk = require('chalk')
 
 //chalk colors
-const error = chalk.red.bold
-const success = chalk.green.bold
+const errorColor = chalk.red.bold
+const successColor = chalk.green.bold
 
 const getNotes = function () {
     return 'Your notes...'
@@ -39,14 +39,14 @@ const addNote = function (newTitle, newBody) {
     const duplicateFound = findDuplicate(notes, newTitle)
     
     if (duplicateFound) {
-        console.log(`${error('\nERROR: Title already taken')}: '${newTitle}'\n`);
+        console.log(`${errorColor('\nERROR: Title already taken')}: '${newTitle}'\n`);
     } else {
         notes.push({
             title: newTitle,
             body: newBody
         })
         saveNotes(notes);
-        console.log(`${success('\nNew note added')}: '${newTitle}'\n`);
+        console.log(`${successColor('\nNew note added')}: '${newTitle}'\n`);
     }
 };
 
@@ -59,11 +59,11 @@ const removeNote = function (title) {
         notes.forEach((note, i) => {
             if (note.title.toUpperCase() === title.toUpperCase()){
                 notes.splice(i, 1)
-                console.log(`\n${success('Note removed')}: '${note.title}'\n`);
+                console.log(`\n${successColor('Note removed')}: '${note.title}'\n`);
             }
         })
     } else {
-        console.log(`${error(`\nERROR: Note not found`)}: '${title}'\n`);
+        console.log(`${errorColor(`\nERROR: Note not found`)}: '${title}'\n`);
         
     }
     saveNotes(notes)
